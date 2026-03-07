@@ -5,6 +5,7 @@
 #include "Shape3D.h"
 #include "ShapeResultData.h"
 #include <string>
+#include <numbers>
 using namespace std;
 #include "ShapeParam.h"
 
@@ -18,14 +19,33 @@ class Torus : public Shape3D<T> {
     inline Torus(const ShapeParam<T> & param);
 
 };
+
 template<class T>
 inline ShapeResultData<T> Torus<T>::compute() {
-  return ShapeResultData<T>();
+
+    ShapeResultData<T> result;
+
+    T R = this->m_param.get(PARAM_RADIUS);
+    // using 'PARAM_WIDTH' as radius_2; consider adding 'PARAM_RADIUS_2' to the enum
+    T r = this->m_param.get(PARAM_WIDTH);
+
+    const T PI = static_cast<T>(numbers::pi);
+
+    T volume = 2 * PI * PI * R * r * r;
+    T surface = 4 * PI * PI * R * r;
+
+    result.set(RESULT_VOLUME, volume);
+    result.set(RESULT_SURFACE, surface);
+
+    return result;
 }
 
 template<class T>
 inline string Torus<T>::print() {
-  return "";
+    T R = this->m_param.get(PARAM_RADIUS);
+    T r = this->m_param.get(PARAM_WIDTH);
+
+    return "Torus(R=" + to_string(R) + ", r=" + to_string(r) + ")";
 }
 
 template<class T>
