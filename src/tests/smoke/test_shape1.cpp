@@ -35,20 +35,4 @@ int main(int argc, char** argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-
-    // TST
-    /*ShapeParam<double> param;
-
-    param.set_attrib(PARAM_RADIUS, 5.0);
-    param.set_attrib(PARAM_RADIUS_2, 2.0);
-
-    Torus<double> torus(param);
-
-    ShapeResult<double> result = torus.compute();
-
-    cout << torus.print() << endl;
-    cout << "Volume: " << result.get_attrib(RESULT_VOLUME) << endl;
-    cout << "Surface: " << result.get_attrib(RESULT_SURFACE) << endl;
-
-    return 0;*/
 }
